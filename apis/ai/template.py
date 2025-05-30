@@ -1,20 +1,19 @@
 from fastapi import APIRouter, Request, HTTPException
 from fastapi.responses import JSONResponse
-from apis.ai.promots import reactBasePrompt, nodeBasePrompt, BASE_PROMPT
+from apis.ai.prompts import reactBasePrompt, nodeBasePrompt, BASE_PROMPT
 import os
 import httpx
 from dotenv import load_dotenv
 
 load_dotenv()
 api_key = os.environ.get("ANT_CLAUDE")
-
 router = APIRouter()
 
 @router.post("/template")
 async def template(request: Request):
     data = await request.json()
     prompt = data.get("prompt")
-    print(prompt)
+    
     
     try:
         async with httpx.AsyncClient() as client:
