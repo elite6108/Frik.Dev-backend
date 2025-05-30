@@ -1,11 +1,11 @@
 from fastapi import FastAPI
+from apis.ai.template import router as template_router
 
 app = FastAPI()
 
+app.include_router(template_router, prefix="/ai", tags=["AI"])
 @app.get("/")
 def read_root():
     return {"message": "Hello, World!"}
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: str = None):
-    return {"item_id": item_id, "query": q}
+
